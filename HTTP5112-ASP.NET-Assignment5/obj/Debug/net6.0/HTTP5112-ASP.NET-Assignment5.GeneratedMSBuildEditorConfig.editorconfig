@@ -15,12 +15,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5/Views/Class/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xhc3MvTGlzdC5jc2h0bWw=
+[/Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5/Views/Course/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5/Views/Class/Show.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xhc3MvU2hvdy5jc2h0bWw=
+[/Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5/Views/Course/Show.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL1Nob3cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/leeraymond/Documents/Web Development/HTTP5112/ASP.NET/HTTP5112-ASP.NET-Assignment5/HTTP5112-ASP.NET-Assignment5/Views/Home/Index.cshtml]

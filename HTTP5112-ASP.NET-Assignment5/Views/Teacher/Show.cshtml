@@ -12,13 +12,13 @@
     <p>Teacher Employee Number: @Model.EmployeeNumber</p>
     <p>Teacher Hire Date: @Model.HireDate</p>
     <p>Teacher Salary: @Model.Salary</p>
-    @if (ViewBag.classes.Count > 0)
+    @if (ViewBag.courses.Count > 0)
     {
         <p>classes</p>
         <ul>
-            @foreach (var Class in ViewBag.classes)
+            @foreach (var Course in ViewBag.courses)
             {
-                <li><a href="/Class/Show/@Class.ClassId">@Class.ClassCode - @Class.ClassName</a></li>
+                <li><a href="/Course/Show/@Course.CourseId">@Course.CourseCode - @Course.CourseName</a></li>
             }
         </ul>
     }

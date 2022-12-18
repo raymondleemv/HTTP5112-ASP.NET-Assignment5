@@ -817,11 +817,11 @@ function Sizzle( selector, context, results, seed ) {
 					push.apply( results, context.getElementsByTagName( selector ) );
 					return results;
 
-				// Class selector
-				} else if ( ( m = match[ 3 ] ) && support.getElementsByClassName &&
-					context.getElementsByClassName ) {
+				// Course selector
+				} else if ( ( m = match[ 3 ] ) && support.getElementsByCourseName &&
+					context.getElementsByCourseName ) {
 
-					push.apply( results, context.getElementsByClassName( m ) );
+					push.apply( results, context.getElementsByCourseName( m ) );
 					return results;
 				}
 			}
@@ -1191,7 +1191,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	} );
 
 	// Support: IE<9
-	support.getElementsByClassName = rnative.test( document.getElementsByClassName );
+	support.getElementsByCourseName = rnative.test( document.getElementsByCourseName );
 
 	// Support: IE<10
 	// Check if getElementById returns elements by name
@@ -1290,10 +1290,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 			return results;
 		};
 
-	// Class
-	Expr.find[ "CLASS" ] = support.getElementsByClassName && function( className, context ) {
-		if ( typeof context.getElementsByClassName !== "undefined" && documentIsHTML ) {
-			return context.getElementsByClassName( className );
+	// Course
+	Expr.find[ "CLASS" ] = support.getElementsByCourseName && function( className, context ) {
+		if ( typeof context.getElementsByCourseName !== "undefined" && documentIsHTML ) {
+			return context.getElementsByCourseName( className );
 		}
 	};
 
@@ -8251,7 +8251,7 @@ jQuery.each( [
 	}
 
 
-function getClass( elem ) {
+function getCourse( elem ) {
 	return elem.getAttribute && elem.getAttribute( "class" ) || "";
 }
 
@@ -8266,13 +8266,13 @@ function classesToArray( value ) {
 }
 
 jQuery.fn.extend( {
-	addClass: function( value ) {
+	addCourse: function( value ) {
 		var classes, elem, cur, curValue, clazz, j, finalValue,
 			i = 0;
 
 		if ( isFunction( value ) ) {
 			return this.each( function( j ) {
-				jQuery( this ).addClass( value.call( this, j, getClass( this ) ) );
+				jQuery( this ).addCourse( value.call( this, j, getCourse( this ) ) );
 			} );
 		}
 
@@ -8280,7 +8280,7 @@ jQuery.fn.extend( {
 
 		if ( classes.length ) {
 			while ( ( elem = this[ i++ ] ) ) {
-				curValue = getClass( elem );
+				curValue = getCourse( elem );
 				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
@@ -8303,13 +8303,13 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	removeClass: function( value ) {
+	removeCourse: function( value ) {
 		var classes, elem, cur, curValue, clazz, j, finalValue,
 			i = 0;
 
 		if ( isFunction( value ) ) {
 			return this.each( function( j ) {
-				jQuery( this ).removeClass( value.call( this, j, getClass( this ) ) );
+				jQuery( this ).removeCourse( value.call( this, j, getCourse( this ) ) );
 			} );
 		}
 
@@ -8321,9 +8321,9 @@ jQuery.fn.extend( {
 
 		if ( classes.length ) {
 			while ( ( elem = this[ i++ ] ) ) {
-				curValue = getClass( elem );
+				curValue = getCourse( elem );
 
-				// This expression is here for better compressibility (see addClass)
+				// This expression is here for better compressibility (see addCourse)
 				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
@@ -8348,18 +8348,18 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	toggleClass: function( value, stateVal ) {
+	toggleCourse: function( value, stateVal ) {
 		var type = typeof value,
 			isValidValue = type === "string" || Array.isArray( value );
 
 		if ( typeof stateVal === "boolean" && isValidValue ) {
-			return stateVal ? this.addClass( value ) : this.removeClass( value );
+			return stateVal ? this.addCourse( value ) : this.removeCourse( value );
 		}
 
 		if ( isFunction( value ) ) {
 			return this.each( function( i ) {
-				jQuery( this ).toggleClass(
-					value.call( this, i, getClass( this ), stateVal ),
+				jQuery( this ).toggleCourse(
+					value.call( this, i, getCourse( this ), stateVal ),
 					stateVal
 				);
 			} );
@@ -8378,16 +8378,16 @@ jQuery.fn.extend( {
 				while ( ( className = classNames[ i++ ] ) ) {
 
 					// Check each className given, space separated list
-					if ( self.hasClass( className ) ) {
-						self.removeClass( className );
+					if ( self.hasCourse( className ) ) {
+						self.removeCourse( className );
 					} else {
-						self.addClass( className );
+						self.addCourse( className );
 					}
 				}
 
 			// Toggle whole class name
 			} else if ( value === undefined || type === "boolean" ) {
-				className = getClass( this );
+				className = getCourse( this );
 				if ( className ) {
 
 					// Store className if set
@@ -8409,14 +8409,14 @@ jQuery.fn.extend( {
 		} );
 	},
 
-	hasClass: function( selector ) {
+	hasCourse: function( selector ) {
 		var className, elem,
 			i = 0;
 
 		className = " " + selector + " ";
 		while ( ( elem = this[ i++ ] ) ) {
 			if ( elem.nodeType === 1 &&
-				( " " + stripAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
+				( " " + stripAndCollapse( getCourse( elem ) ) + " " ).indexOf( className ) > -1 ) {
 					return true;
 			}
 		}

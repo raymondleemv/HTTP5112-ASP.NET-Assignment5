@@ -50,7 +50,7 @@ $.extend( $.fn, {
 				validator.submitButton = event.currentTarget;
 
 				// Allow suppressing validation by adding a cancel class to the submit button
-				if ( $( this ).hasClass( "cancel" ) ) {
+				if ( $( this ).hasCourse( "cancel" ) ) {
 					validator.cancelSubmit = true;
 				}
 
@@ -273,9 +273,9 @@ $.extend( $.validator, {
 		messages: {},
 		groups: {},
 		rules: {},
-		errorClass: "error",
-		pendingClass: "pending",
-		validClass: "valid",
+		errorCourse: "error",
+		pendingCourse: "pending",
+		validCourse: "valid",
 		errorElement: "label",
 		focusCleanup: false,
 		focusInvalid: true,
@@ -290,7 +290,7 @@ $.extend( $.validator, {
 			// Hide error label and remove error class on focus if enabled
 			if ( this.settings.focusCleanup ) {
 				if ( this.settings.unhighlight ) {
-					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+					this.settings.unhighlight.call( this, element, this.settings.errorCourse, this.settings.validCourse );
 				}
 				this.hideThese( this.errorsFor( element ) );
 			}
@@ -338,18 +338,18 @@ $.extend( $.validator, {
 				this.element( element.parentNode );
 			}
 		},
-		highlight: function( element, errorClass, validClass ) {
+		highlight: function( element, errorCourse, validCourse ) {
 			if ( element.type === "radio" ) {
-				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+				this.findByName( element.name ).addCourse( errorCourse ).removeCourse( validCourse );
 			} else {
-				$( element ).addClass( errorClass ).removeClass( validClass );
+				$( element ).addCourse( errorCourse ).removeCourse( validCourse );
 			}
 		},
-		unhighlight: function( element, errorClass, validClass ) {
+		unhighlight: function( element, errorCourse, validCourse ) {
 			if ( element.type === "radio" ) {
-				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+				this.findByName( element.name ).removeCourse( errorCourse ).addCourse( validCourse );
 			} else {
-				$( element ).removeClass( errorClass ).addClass( validClass );
+				$( element ).removeCourse( errorCourse ).addCourse( validCourse );
 			}
 		}
 	},
@@ -559,13 +559,13 @@ $.extend( $.validator, {
 			if ( this.settings.unhighlight ) {
 				for ( i = 0; elements[ i ]; i++ ) {
 					this.settings.unhighlight.call( this, elements[ i ],
-						this.settings.errorClass, "" );
-					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+						this.settings.errorCourse, "" );
+					this.findByName( elements[ i ].name ).removeCourse( this.settings.validCourse );
 				}
 			} else {
 				elements
-					.removeClass( this.settings.errorClass )
-					.removeClass( this.settings.validClass );
+					.removeCourse( this.settings.errorCourse )
+					.removeCourse( this.settings.validCourse );
 			}
 		},
 
@@ -664,8 +664,8 @@ $.extend( $.validator, {
 		},
 
 		errors: function() {
-			var errorClass = this.settings.errorClass.split( " " ).join( "." );
-			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+			var errorCourse = this.settings.errorCourse.split( " " ).join( "." );
+			return $( this.settings.errorElement + "." + errorCourse, this.errorContext );
 		},
 
 		resetInternals: function() {
@@ -895,7 +895,7 @@ $.extend( $.validator, {
 			for ( i = 0; this.errorList[ i ]; i++ ) {
 				error = this.errorList[ i ];
 				if ( this.settings.highlight ) {
-					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
+					this.settings.highlight.call( this, error.element, this.settings.errorCourse, this.settings.validCourse );
 				}
 				this.showLabel( error.element, error.message );
 			}
@@ -909,7 +909,7 @@ $.extend( $.validator, {
 			}
 			if ( this.settings.unhighlight ) {
 				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
-					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
+					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorCourse, this.settings.validCourse );
 				}
 			}
 			this.toHide = this.toHide.not( this.toShow );
@@ -936,7 +936,7 @@ $.extend( $.validator, {
 			if ( error.length ) {
 
 				// Refresh error/success class
-				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
+				error.removeCourse( this.settings.validCourse ).addCourse( this.settings.errorCourse );
 
 				// Replace message on existing label
 				error.html( message );
@@ -945,7 +945,7 @@ $.extend( $.validator, {
 				// Create error element
 				error = $( "<" + this.settings.errorElement + ">" )
 					.attr( "id", elementID + "-error" )
-					.addClass( this.settings.errorClass )
+					.addCourse( this.settings.errorCourse )
 					.html( message || "" );
 
 				// Maintain reference to the element to be placed into the DOM
@@ -1001,7 +1001,7 @@ $.extend( $.validator, {
 			if ( !message && this.settings.success ) {
 				error.text( "" );
 				if ( typeof this.settings.success === "string" ) {
-					error.addClass( this.settings.success );
+					error.addCourse( this.settings.success );
 				} else {
 					this.settings.success( error, element );
 				}
@@ -1091,7 +1091,7 @@ $.extend( $.validator, {
 		startRequest: function( element ) {
 			if ( !this.pending[ element.name ] ) {
 				this.pendingRequest++;
-				$( element ).addClass( this.settings.pendingClass );
+				$( element ).addCourse( this.settings.pendingCourse );
 				this.pending[ element.name ] = true;
 			}
 		},
@@ -1104,7 +1104,7 @@ $.extend( $.validator, {
 				this.pendingRequest = 0;
 			}
 			delete this.pending[ element.name ];
-			$( element ).removeClass( this.settings.pendingClass );
+			$( element ).removeCourse( this.settings.pendingCourse );
 			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() ) {
 				$( this.currentForm ).submit();
 
@@ -1142,7 +1142,7 @@ $.extend( $.validator, {
 				.removeData( "validator" )
 				.find( ".validate-equalTo-blur" )
 					.off( ".validate-equalTo" )
-					.removeClass( "validate-equalTo-blur" );
+					.removeCourse( "validate-equalTo-blur" );
 		}
 
 	},
@@ -1158,7 +1158,7 @@ $.extend( $.validator, {
 		creditcard: { creditcard: true }
 	},
 
-	addClassRules: function( className, rules ) {
+	addCourseRules: function( className, rules ) {
 		if ( className.constructor === String ) {
 			this.classRuleSettings[ className ] = rules;
 		} else {
@@ -1348,7 +1348,7 @@ $.extend( $.validator, {
 		$.validator.methods[ name ] = method;
 		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
 		if ( method.length < 3 ) {
-			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
+			$.validator.addCourseRules( name, $.validator.normalizeRule( name ) );
 		}
 	},
 
@@ -1491,7 +1491,7 @@ $.extend( $.validator, {
 			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
 			var target = $( param );
 			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
-				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
+				target.addCourse( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
 					$( element ).valid();
 				} );
 			}

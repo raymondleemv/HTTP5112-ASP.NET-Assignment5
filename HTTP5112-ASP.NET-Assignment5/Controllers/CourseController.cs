@@ -8,32 +8,32 @@ using HTTP5112Assignment5.Models;
 
 namespace HTTP5112Assignment5.Controllers
 {
-    public class ClassController : Controller
+    public class CourseController : Controller
     {
-        // GET: Class
+        // GET: Course
         public ActionResult Index()
         {
             return View();
         }
 
-        //GET : /Class/List
+        //GET : /Course/List
         public ActionResult List()
         {
-            ClassDataController controller = new ClassDataController();
-            IEnumerable<Class> Classes = controller.ListClass();
-            return View(Classes);
+            CourseDataController controller = new CourseDataController();
+            IEnumerable<Course> Courses = controller.ListCourse();
+            return View(Courses);
         }
 
-        //GET : /Class/Show/{id}
+        //GET : /Course/Show/{id}
         public ActionResult Show(int id)
         {
-            ClassDataController classController = new ClassDataController();
-            Class NewClass = classController.FindClass(id);
+            CourseDataController courseController = new CourseDataController();
+            Course NewCourse = courseController.FindCourse(id);
             TeacherDataController teacherController = new TeacherDataController();
-            Teacher Teacher = teacherController.FindTeacher(NewClass.TeacherId);
+            Teacher Teacher = teacherController.FindTeacher(NewCourse.TeacherId);
             ViewBag.Teacher = Teacher;
 
-            return View(NewClass);
+            return View(NewCourse);
         }
     }
 }

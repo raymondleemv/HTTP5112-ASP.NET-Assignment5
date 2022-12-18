@@ -47,7 +47,7 @@ namespace HTTP5112Assignment5.Models
         /// <returns>A MySqlConnection Object</returns>
         public MySqlConnection AccessDatabase()
         { 
-            //We are instantiating the MySqlConnection Class to create an object
+            //We are instantiating the MySqlConnection Course to create an object
             //the object is a specific connection to our blog database on port 3307 of localhost
             return new MySqlConnection(ConnectionString);
         }

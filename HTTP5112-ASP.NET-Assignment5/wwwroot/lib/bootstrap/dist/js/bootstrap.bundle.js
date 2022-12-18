@@ -776,7 +776,7 @@
   const CLASS_NAME_SHOW$8 = 'show';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -865,7 +865,7 @@
   const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$b}${DATA_API_KEY$7}`;
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -1138,7 +1138,7 @@
   const POINTER_TYPE_PEN = 'pen';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -1424,8 +1424,8 @@
 
       const isCycling = Boolean(this._interval);
       const isNext = order === ORDER_NEXT;
-      const directionalClassName = isNext ? CLASS_NAME_START : CLASS_NAME_END;
-      const orderClassName = isNext ? CLASS_NAME_NEXT : CLASS_NAME_PREV;
+      const directionalCourseName = isNext ? CLASS_NAME_START : CLASS_NAME_END;
+      const orderCourseName = isNext ? CLASS_NAME_NEXT : CLASS_NAME_PREV;
 
       const eventDirectionName = this._orderToDirection(order);
 
@@ -1469,15 +1469,15 @@
       };
 
       if (this._element.classList.contains(CLASS_NAME_SLIDE)) {
-        nextElement.classList.add(orderClassName);
+        nextElement.classList.add(orderCourseName);
         reflow(nextElement);
-        activeElement.classList.add(directionalClassName);
-        nextElement.classList.add(directionalClassName);
+        activeElement.classList.add(directionalCourseName);
+        nextElement.classList.add(directionalCourseName);
 
         const completeCallBack = () => {
-          nextElement.classList.remove(directionalClassName, orderClassName);
+          nextElement.classList.remove(directionalCourseName, orderCourseName);
           nextElement.classList.add(CLASS_NAME_ACTIVE$2);
-          activeElement.classList.remove(CLASS_NAME_ACTIVE$2, orderClassName, directionalClassName);
+          activeElement.classList.remove(CLASS_NAME_ACTIVE$2, orderCourseName, directionalCourseName);
           this._isSliding = false;
           setTimeout(triggerSlidEvent, 0);
         };
@@ -1644,7 +1644,7 @@
   const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -1671,7 +1671,7 @@
       this._initializeChildren();
 
       if (!this._config.parent) {
-        this._addAriaAndCollapsedClass(this._triggerArray, this._isShown());
+        this._addAriaAndCollapsedCourse(this._triggerArray, this._isShown());
       }
 
       if (this._config.toggle) {
@@ -1747,7 +1747,7 @@
 
       this._element.style[dimension] = 0;
 
-      this._addAriaAndCollapsedClass(this._triggerArray, true);
+      this._addAriaAndCollapsedCourse(this._triggerArray, true);
 
       this._isTransitioning = true;
 
@@ -1797,7 +1797,7 @@
         const elem = getElementFromSelector(trigger);
 
         if (elem && !this._isShown(elem)) {
-          this._addAriaAndCollapsedClass([trigger], false);
+          this._addAriaAndCollapsedCourse([trigger], false);
         }
       }
 
@@ -1849,12 +1849,12 @@
         const selected = getElementFromSelector(element);
 
         if (selected) {
-          this._addAriaAndCollapsedClass([element], this._isShown(selected));
+          this._addAriaAndCollapsedCourse([element], this._isShown(selected));
         }
       });
     }
 
-    _addAriaAndCollapsedClass(triggerArray, isOpen) {
+    _addAriaAndCollapsedCourse(triggerArray, isOpen) {
       if (!triggerArray.length) {
         return;
       }
@@ -3762,7 +3762,7 @@
   };
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -4538,7 +4538,7 @@
   const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -4952,7 +4952,7 @@
   const SELECTOR_DATA_TOGGLE$1 = '[data-bs-toggle="offcanvas"]';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -5311,7 +5311,7 @@
     container: '(string|element|boolean)',
     fallbackPlacements: 'array',
     boundary: '(string|element)',
-    customClass: '(string|function)',
+    customCourse: '(string|function)',
     sanitize: 'boolean',
     sanitizeFn: '(null|function)',
     allowList: 'object',
@@ -5337,7 +5337,7 @@
     container: false,
     fallbackPlacements: ['top', 'right', 'bottom', 'left'],
     boundary: 'clippingParents',
-    customClass: '',
+    customCourse: '',
     sanitize: true,
     sanitizeFn: null,
     allowList: DefaultAllowlist,
@@ -5369,7 +5369,7 @@
   const TRIGGER_MANUAL = 'manual';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -5495,7 +5495,7 @@
 
       const attachment = this._getAttachment(placement);
 
-      this._addAttachmentClass(attachment);
+      this._addAttachmentCourse(attachment);
 
       const {
         container
@@ -5515,10 +5515,10 @@
 
       tip.classList.add(CLASS_NAME_SHOW$2);
 
-      const customClass = this._resolvePossibleFunction(this._config.customClass);
+      const customCourse = this._resolvePossibleFunction(this._config.customCourse);
 
-      if (customClass) {
-        tip.classList.add(...customClass.split(' '));
+      if (customCourse) {
+        tip.classList.add(...customCourse.split(' '));
       } // If this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
@@ -5562,7 +5562,7 @@
           tip.remove();
         }
 
-        this._cleanTipClass();
+        this._cleanTipCourse();
 
         this._element.removeAttribute('aria-describedby');
 
@@ -5753,8 +5753,8 @@
       };
     }
 
-    _addAttachmentClass(attachment) {
-      this.getTipElement().classList.add(`${this._getBasicClassPrefix()}-${this.updateAttachment(attachment)}`);
+    _addAttachmentCourse(attachment) {
+      this.getTipElement().classList.add(`${this._getBasicCoursePrefix()}-${this.updateAttachment(attachment)}`);
     }
 
     _getAttachment(placement) {
@@ -5924,17 +5924,17 @@
       return config;
     }
 
-    _cleanTipClass() {
+    _cleanTipCourse() {
       const tip = this.getTipElement();
-      const basicClassPrefixRegex = new RegExp(`(^|\\s)${this._getBasicClassPrefix()}\\S+`, 'g');
-      const tabClass = tip.getAttribute('class').match(basicClassPrefixRegex);
+      const basicCoursePrefixRegex = new RegExp(`(^|\\s)${this._getBasicCoursePrefix()}\\S+`, 'g');
+      const tabCourse = tip.getAttribute('class').match(basicCoursePrefixRegex);
 
-      if (tabClass !== null && tabClass.length > 0) {
-        tabClass.map(token => token.trim()).forEach(tClass => tip.classList.remove(tClass));
+      if (tabCourse !== null && tabCourse.length > 0) {
+        tabCourse.map(token => token.trim()).forEach(tCourse => tip.classList.remove(tCourse));
       }
     }
 
-    _getBasicClassPrefix() {
+    _getBasicCoursePrefix() {
       return CLASS_PREFIX$1;
     }
 
@@ -5949,9 +5949,9 @@
 
       this.tip = state.elements.popper;
 
-      this._cleanTipClass();
+      this._cleanTipCourse();
 
-      this._addAttachmentClass(this._getAttachment(state.placement));
+      this._addAttachmentCourse(this._getAttachment(state.placement));
     } // Static
 
 
@@ -6022,7 +6022,7 @@
   const SELECTOR_CONTENT = '.popover-body';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -6060,7 +6060,7 @@
       return this._resolvePossibleFunction(this._config.content);
     }
 
-    _getBasicClassPrefix() {
+    _getBasicCoursePrefix() {
       return CLASS_PREFIX;
     } // Static
 
@@ -6133,7 +6133,7 @@
   const METHOD_POSITION = 'position';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -6359,7 +6359,7 @@
   const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 
@@ -6563,7 +6563,7 @@
   };
   /**
    * ------------------------------------------------------------------------
-   * Class Definition
+   * Course Definition
    * ------------------------------------------------------------------------
    */
 

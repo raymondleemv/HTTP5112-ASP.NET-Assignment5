@@ -30,8 +30,8 @@ namespace HTTP5112Assignment5.Controllers
         {
             TeacherDataController controller = new TeacherDataController();
             Teacher NewTeacher = controller.FindTeacher(id);
-            IEnumerable<Class> Classes = controller.ListClasses(id);
-            ViewBag.classes = Classes;
+            IEnumerable<Course> Courses = controller.ListCoursesForTeacher(id);
+            ViewBag.courses = Courses;
 
             return View(NewTeacher);
         }

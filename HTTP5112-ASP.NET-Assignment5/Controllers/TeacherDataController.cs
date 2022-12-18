@@ -144,10 +144,10 @@ namespace HTTP5112Assignment5.Controllers
         /// <param name="id">The input number that specifies the teacher by id</param>
         /// <returns>A list of classes that the teacher specified by the input id teaches</returns>
         [HttpGet]
-        [Route("api/TeacherData/ListClasses/{id}")]
-        public List<Class> ListClasses(int id)
+        [Route("api/TeacherData/ListCoursesForTeacher/{id}")]
+        public List<Course> ListCoursesForTeacher(int id)
         {
-            List<Class> Classes = new List<Class> { };
+            List<Course> Courses = new List<Course> { };
 
             //Create an instance of a connection
             MySqlConnection Conn = schoolDb.AccessDatabase();
@@ -170,28 +170,28 @@ namespace HTTP5112Assignment5.Controllers
             while (ResultSet.Read())
             {
                 //Access Column information by the DB column name as an index
-                int ClassId = (int)ResultSet["ClassId"];
-                string ClassCode = ResultSet["ClassCode"].ToString().ToUpper();
+                int CourseId = (int)ResultSet["ClassId"];
+                string CourseCode = ResultSet["ClassCode"].ToString().ToUpper();
                 int TeacherId = Convert.ToInt32(ResultSet["TeacherId"]);
                 string StartDate = ResultSet["StartDate"].ToString();
                 string FinishDate = ResultSet["FinishDate"].ToString();
-                string ClassName = ResultSet["ClassName"].ToString();
+                string CourseName = ResultSet["ClassName"].ToString();
 
-                Class NewClass = new Class();
-                NewClass.ClassId = ClassId;
-                NewClass.ClassCode = ClassCode;
-                NewClass.TeacherId = TeacherId;
-                NewClass.StartDate = StartDate;
-                NewClass.FinishDate = FinishDate;
-                NewClass.ClassName = ClassName;
+                Course NewCourse = new Course();
+                NewCourse.CourseId = CourseId;
+                NewCourse.CourseCode = CourseCode;
+                NewCourse.TeacherId = TeacherId;
+                NewCourse.StartDate = StartDate;
+                NewCourse.FinishDate = FinishDate;
+                NewCourse.CourseName = CourseName;
 
-                Classes.Add(NewClass);
+                Courses.Add(NewCourse);
             }
 
             //Close the connection between the MySQL Database and the WebServer
             Conn.Close();
 
-            return Classes;
+            return Courses;
         }
 
         /// <summary>
